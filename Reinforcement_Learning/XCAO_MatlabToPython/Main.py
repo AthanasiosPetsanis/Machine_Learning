@@ -122,7 +122,8 @@ for EPANAL in range(nof_EPANAL):
                 theta_acc = (g * sintheta - costheta * temp)/ (
                     length*(4.0/3.0 - pole_mass * costheta**2/total_mass)
                 )
-                
+                x_acc = temp - pole_mass_length * theta_acc * costheta / total_mass
+               
                 x = x + dt * x_dot
                 x_dot = x_dot + dt * x_acc
                 theta = theta + dt * theta_dot
