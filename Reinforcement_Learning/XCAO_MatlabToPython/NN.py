@@ -11,8 +11,8 @@ class NeuralNetwork(nn.Module):
             param.requires_grad = False
         self.L2 = nn.Linear(hid_neurons, output_size, bias=False)
         self.tanh = nn.Tanh()
-        self.L1.weight.data = torch.as_tensor(w1, dtype=torch.float64)
-        self.L2.weight.data = torch.as_tensor(w2, dtype=torch.float64)
+        self.L1.weight.data = torch.as_tensor(w1, dtype=torch.float32)
+        self.L2.weight.data = torch.as_tensor(w2, dtype=torch.float32)
 
     def forward(self,x):
 
