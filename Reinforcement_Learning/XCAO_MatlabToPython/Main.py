@@ -10,7 +10,7 @@ from random import randint
 from NN import NeuralNetwork
 import torch
 from torch import sum, transpose, square, matmul, as_tensor
-from torch import float64 as float32
+from torch import float32
 import torch.optim as optim
 from torch.autograd.functional import jacobian as jacob
 import scipy.io
@@ -116,10 +116,12 @@ for EPANAL in range(nof_EPANAL):
                 v_sat = force*tanh(v)#+0.1*randn()*v)
                 #v_sat = force*tanh(v)
 
-                temp = (v_sat + pole_mass_length * theta_dot**2 * sin(theta) ) / total_mass
-                theta_acc = (g * sin(theta) - cos(theta) * temp)/ \
-                            (length*(4/3 - pole_mass * cos(theta)**2/total_mass))
-                x_acc = temp - pole_mass_length * theta_acc * cos(theta) / total_mass
+                sintheta = sin(theta)
+                costheta = cos(theta)
+                temp = (v_sat + pole_mass_length * theta_dot**2 * sintheta ) / total_mass
+                theta_acc = (g * sintheta - costheta * temp)/ (
+                    length*(4.0/3.0 - pole_mass * costheta**2/total_mass)
+                )
                 
                 x = x + dt * x_dot
                 x_dot = x_dot + dt * x_acc
